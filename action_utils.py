@@ -17,3 +17,12 @@ def write_note(note: str):
     """
     os.system(f"echo {note} >> %HOMEPATH%/Desktop/assistant_notes.txt")
     
+def delete_notes():
+    """Deletes the notes.txt file."""
+    if os.path.exists(fr"%HOMEPATH%\Desktop\assistant_notes.txt"):
+        os.system(fr"del %HOMEPATH%\Desktop\assistant_notes.txt")
+    
+def delete_all_data():
+    """Deletes all data that the assistant has stored."""
+    delete_notes()
+    os.system(f"del output-*.wav")

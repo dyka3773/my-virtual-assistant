@@ -31,33 +31,35 @@ def respond(voice_data: str):
     if there_exists(["search for", "google"], voice_data):
         search_term = voice_data.split("for")[-1] if "for" in voice_data else voice_data.split("google")[-1]
         url = f"https://google.com/search?q={search_term}"
-        su.speak(f"Here is what I found for '{search_term}' on google")
         au.open_url(url)
+        su.speak(f"Here is what I found for '{search_term}' on google")
     
     if there_exists(["youtube", "find videos for"], voice_data):
         search_term = voice_data.split("for")[-1] if "for" in voice_data else voice_data.split("youtube")[-1]
         url = f"https://www.youtube.com/results?search_query={search_term}"
         search_term = search_term.strip()
-        su.speak(f"Here is what I found for '{search_term}' on youtube")
         au.open_url(url)
+        su.speak(f"Here is what I found for '{search_term}' on youtube")
     
     if there_exists(["what is the weather", "what's the weather", "show me the weather"], voice_data):
         if "weather in" in voice_data:
             city = voice_data.split("in")[-1]
             url = f"https://www.google.com/search?q=weather+in+{city}"
-            su.speak(f"Here is the weather in {city} according to google")
             au.open_url(url)
+            su.speak(f"Here is the weather in {city} according to google")
         else:
             url = f"https://www.google.com/search?q=weather"
-            su.speak("Here is the weather according to google")
             au.open_url(url)
+            su.speak("Here is the weather according to google")
     
     if there_exists(["take a note", "write this down", "remember this"], voice_data):
         note = rec.record_audio("What would you like me to write down?")
         au.write_note(note)
         su.speak("I've made a note of that")
         
+    # TODO: Add a way to play music from spotify
     
     if there_exists(["bye", "goodbye", "exit", "quit", "stop"], voice_data):
         su.speak("Goodbye")
+        au.delete_all_data()
         exit()
