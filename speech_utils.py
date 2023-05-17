@@ -1,8 +1,9 @@
 import logging
+import pyttsx3
 
 logging.basicConfig(
     filename="app.log",
-    level=logging.DEBUG,
+    level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     datefmt='%m/%d/%Y %H:%M:%S'
 )
@@ -22,5 +23,14 @@ def speak(message: str, actor: str = "Assistant", errlevel: str = "info"):
     if actor == "Assistant":
         assistant_speak(message)
         
-def assistant_speak(audio):
-    pass
+def assistant_speak(audio: str):
+    """Speaks the given audio.
+
+    Args:
+        audio (str): The audio to be spoken.
+    """
+    engine = pyttsx3.init()
+    voices = engine.getProperty('voices')
+    engine.setProperty('voice', voices[1].id)
+    engine.say(audio)
+    engine.runAndWait()

@@ -15,5 +15,5 @@ def write_note(note: str):
     Args:
         note (str): The note to write.
     """
-    os.system(f"echo {note} >> %HOMEPATH%/Desktop/notes.txt")
+    os.system(f"echo {note} >> %HOMEPATH%/Desktop/assistant_notes.txt")
     

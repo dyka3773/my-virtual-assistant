@@ -2,6 +2,7 @@ import time
 
 import speech_utils as su
 import action_utils as au
+import recording as rec
 
 def there_exists(terms: list, voice_data: str) -> bool:
     """Checks if any of the terms are in the voice data.
@@ -51,8 +52,8 @@ def respond(voice_data: str):
             su.speak("Here is the weather according to google")
             au.open_url(url)
     
-    if there_exists(["take a note", "write this down"], voice_data):
-        note = voice_data.split("note")[-1] if "note" in voice_data else voice_data.split("down")[-1]
+    if there_exists(["take a note", "write this down", "remember this"], voice_data):
+        note = rec.record_audio("What would you like me to write down?")
         au.write_note(note)
         su.speak("I've made a note of that")
         
