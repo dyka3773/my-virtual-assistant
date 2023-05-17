@@ -63,3 +63,25 @@ def respond(voice_data: str):
         su.speak("Goodbye")
         au.delete_all_data()
         exit()
+        
+    if there_exists(["delete notes", "delete my notes"], voice_data):
+        au.delete_notes()
+        su.speak("I've deleted all of your notes")
+        
+    if there_exists(["delete all data", "delete my data"], voice_data):
+        au.delete_all_data()
+        su.speak("I've deleted all of your data")
+        
+    if there_exists(["deactivate assistant"], voice_data):
+        su.speak("OK, I'll be here if you need me. In order to activate me again, say 'Activate Assistant'")
+        return True
+    
+def activate_assistant():
+    su.speak("Hello, I am your personal assistant")
+    su.speak("How can I help you?")
+    while True:
+        voice_data = rec.record_audio()
+        if voice_data:
+            su.speak(voice_data,actor="You")
+            if respond(voice_data):
+                break
