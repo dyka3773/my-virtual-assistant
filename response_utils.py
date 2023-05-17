@@ -1,4 +1,5 @@
 import time
+import pyjokes
 
 import speech_utils as su
 import action_utils as au
@@ -56,8 +57,15 @@ def respond(voice_data: str):
         note = rec.record_audio("What would you like me to write down?")
         au.write_note(note)
         su.speak("I've made a note of that")
-        
-    # TODO: Add a way to play music from spotify
+    
+    if there_exists(["tell a joke", "tell me a joke"], voice_data):
+        answer = "yes"
+        while answer == "yes":
+            su.speak(pyjokes.get_joke())
+            answer = rec.record_audio("Would you like to hear another joke?")
+            su.speak(answer, actor="You")
+        su.speak("OK, I'll stop telling jokes")
+        su.speak("How can I help you?")      
     
     if there_exists(["bye", "goodbye", "exit", "quit", "stop"], voice_data):
         su.speak("Goodbye")

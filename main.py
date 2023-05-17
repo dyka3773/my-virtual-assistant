@@ -31,7 +31,7 @@ if __name__ == "__main__":
         main()
     except KeyboardInterrupt:
         logger.error("|| User - Keyboard Interrupt ||")
+        delete_all_data()
     except Exception as e:
         logger.error(e)
-    finally:
         delete_all_data()
