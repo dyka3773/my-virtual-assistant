@@ -1,5 +1,6 @@
 import time
 import pyjokes
+import wikipedia
 
 import speech_utils as su
 import action_utils as au
@@ -65,7 +66,14 @@ def respond(voice_data: str):
             answer = rec.record_audio("Would you like to hear another joke?")
             su.speak(answer, actor="You")
         su.speak("OK, I'll stop telling jokes")
-        su.speak("How can I help you?")      
+        su.speak("How can I help you?")
+        
+    if there_exists(["who is", "what is", "what's the definition of"], voice_data):
+        search_term = voice_data.split("is")[-1] if "is" in voice_data else voice_data.split("of")[-1]
+        try:
+            su.speak(wikipedia.summary(search_term, sentences=2))
+        except:
+            su.speak("I don't know that")
     
     if there_exists(["bye", "goodbye", "exit", "quit", "stop"], voice_data):
         su.speak("Goodbye")
