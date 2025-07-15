@@ -2,9 +2,9 @@ import time
 import pyjokes
 import wikipedia
 
-import speech_utils as su
-import action_utils as au
-import recording as rec
+from . import speech_utils as su
+from . import action_utils as au
+from . import recording as rec
 
 def there_exists(terms: list, voice_data: str) -> bool:
     """Checks if any of the terms are in the voice data.

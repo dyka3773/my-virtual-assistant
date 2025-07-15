@@ -4,7 +4,7 @@ import winsound
 import os
 # import pyttsx3
 
-import tts_transformer
+from . import tts_transformer
 
 logging.basicConfig(
     filename="app.log",

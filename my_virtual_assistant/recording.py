@@ -1,5 +1,5 @@
 import speech_recognition as sr
-from speech_utils import speak
+from .speech_utils import speak
 
 r = sr.Recognizer()
 
